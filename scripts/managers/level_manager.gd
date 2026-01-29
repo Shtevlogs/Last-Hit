@@ -45,10 +45,16 @@ func _spawn_wave(wave: WaveConfig) -> void:
     var new_minion_state := MinionState.new()
     new_minion_state.position = wave.position
     new_minion_state.enemy = wave.is_enemy
+    _spawn_minion(new_minion_state)
+
+func _spawn_minion(minion: MinionState) -> void:
     var new_minion := MINION.instantiate() as Minion
-    new_minion.state = new_minion_state
-    new_minion.position = GridHelper.grid_position_to_world_position(new_minion_state.position)
+    new_minion.state = minion
+    new_minion.position = GridHelper.grid_position_to_world_position(minion.position)
     level_root.add_child(new_minion)
+
+static func spawn_minion(minion: MinionState) -> void:
+    _I._spawn_minion(minion)
 
 static func start_level(num: int) -> void:
     _I.current_wave_set = LevelConfig.DATA[num].clone()

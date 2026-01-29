@@ -6,10 +6,5 @@ static var DATA : Array[WaveSetConfig] = [
             WaveConfig.new()
                 .after(1.0)
                 .on(3),
-            
-            WaveConfig.new()
-                .after(0.5)
-                .at(Vector2i(3, 9))
-                .player()
         ])
 ]

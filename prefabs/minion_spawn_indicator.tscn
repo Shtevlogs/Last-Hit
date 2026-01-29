@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bid2rj5nw7s5n"]
+
+[node name="MinionSpawnIndicator" type="Node2D"]
+
+[node name="WarriorSprite" type="Polygon2D" parent="."]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(4.5, 4.5, 4.5, -4.5, -4.5, -4.5, -4.5, 4.5)
