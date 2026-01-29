@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dqggwvc805fbi"]
+
+[node name="Tile" type="Polygon2D"]
+polygon = PackedVector2Array(7.5, 7.5, -7.5, 7.5, -7.5, -7.5, 7.5, -7.5)
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(6, 6, -6, 6, -6, -6, 6, -6)
+closed = true
+width = 1.0
+default_color = Color(0.43, 0.43, 0.43, 1)

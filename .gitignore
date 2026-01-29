@@ -1,0 +1,25 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# export
+export/
+
+# large files, lol, way to generate 10x too many file types
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.tiff
+*.ico
+*.webp
+*.svg
+*.pdf
+*.docx
+*.doc
+*.wav
+*.mp3
+*.ogg
+*.flac
+*.aac
