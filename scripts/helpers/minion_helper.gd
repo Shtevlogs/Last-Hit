@@ -50,8 +50,12 @@ static func do_attack(node: Node2D, state: MinionState, target: MinionState) -> 
     state.action_cooldown = GameConfig.WARRIOR_ACTION_COOLDOWN
     
 static func a_attacks_b(_a: MinionState, b: MinionState) -> void:
-    b.current_health = max(0, b.current_health - 19) #TODO: damage numbers or whatever
-    if b.current_health == 0:
-        b.destroyed.emit()
+    #TODO: damage numbers or whatever
+    damage_minion(b, 7)
+
+static func damage_minion(state: MinionState, damage: float) -> void:
+    state.current_health = max(0, state.current_health - damage)
+    if state.current_health == 0:
+        state.destroyed.emit()
     else:
-        b.updated.emit()
+        state.updated.emit()
