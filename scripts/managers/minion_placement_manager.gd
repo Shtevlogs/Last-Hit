@@ -29,6 +29,7 @@ func _create_minion(lane: int) -> void:
     var new_minion := MinionState.new()
     new_minion.enemy = false
     new_minion.position = Vector2i(lane, GameConfig.GRID_HEIGHT - 1)
+    GameState.current.minions.append(new_minion)
     LevelManager.spawn_minion(new_minion)
 
 func _on_spawn_warrior_pressed() -> void:

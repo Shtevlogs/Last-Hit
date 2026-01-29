@@ -2,16 +2,13 @@ class_name GameState
 extends _State
 static var current : GameState
 
-var player_units : Array[MinionState] = []
-var enemy_units : Array[MinionState] = []
+var minions : Array[MinionState] = []
 
 func serialize() -> Dictionary:
     return {
-        "player_units": serialize_array(player_units),
-        "enemy_units": serialize_array(enemy_units)
+        "minions": serialize_array(minions)
     }
 
 func deserialize(data: Dictionary) -> _State:
-    player_units = deserialize_array(MinionState, player_units, data["player_units"])
-    enemy_units = deserialize_array(MinionState, enemy_units, data["enemy_units"])
+    minions = deserialize_array(MinionState, minions, data["minions"])
     return self
