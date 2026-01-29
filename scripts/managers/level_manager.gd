@@ -44,6 +44,7 @@ func _process_loop() -> void:
 func _spawn_wave(wave: WaveConfig) -> void:
     var new_minion_state := MinionState.new()
     new_minion_state.position = wave.position
+    new_minion_state.enemy = wave.is_enemy
     var new_minion := MINION.instantiate() as Minion
     new_minion.state = new_minion_state
     new_minion.position = GridHelper.grid_position_to_world_position(new_minion_state.position)

@@ -3,6 +3,11 @@ extends Node2D
 
 var state : MinionState
 
+@onready var warrior_sprite: Polygon2D = $WarriorSprite
+
+func _ready() -> void:
+    warrior_sprite.color = Color.RED if state.enemy else Color.BLUE
+
 func _process(delta: float) -> void:
     MinionHelper.tick_cooldowns(delta, state)
     if state.action_cooldown > 0.0:
