@@ -24,3 +24,5 @@ func _process(_delta: float) -> void:
         MinionPlacementManager.spawn(CasterMinion)
     if Input.is_action_just_pressed("action 3"):
         MinionPlacementManager.spawn(TankMinion)
+    if Input.is_action_just_pressed("esc"):
+        SceneManager.load_scene(SceneManager.SceneId.MAIN_MENU)

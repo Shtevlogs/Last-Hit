@@ -5,4 +5,4 @@ func _ready() -> void:
     #TODO: move me into save game management
     GameState.current = GameState.new()
     
-    SceneManager.load_scene(SceneManager.MAIN_MENU)
+    SceneManager.load_scene(SceneManager.SceneId.MAIN_MENU)
