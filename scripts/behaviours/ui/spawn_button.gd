@@ -20,5 +20,12 @@ func _process(_delta: float) -> void:
     if cd_percent == 1.0:
         second_line = "-Ready-"
     else:
-        second_line = "-%d%%-" % roundi(100.0 * cd_percent)
+        var cd_num := roundi(cd_percent*10.0)
+        var pipes := ""
+        for i in cd_num:
+            pipes += "|"
+        var spaces := ""
+        for i in (10 - cd_num):
+            spaces += " "
+        second_line = "-%s%s-" % [pipes,spaces]
     text = "%s\n%s" % [text_parts[0], second_line]
