@@ -15,7 +15,7 @@ func _ready() -> void:
             new_tile.position = pos
             level_root.add_child(new_tile)
     
-    LevelManager.start_level(0)
+    LevelManager.go_to_new_level()
     
 func _process(_delta: float) -> void:
     if Input.is_action_just_pressed("action 1"):

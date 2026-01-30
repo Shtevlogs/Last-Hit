@@ -11,3 +11,8 @@ func _on_timer_timeout() -> void:
             
     GameState.current.resource_state.player_gold += count
     GameState.current.resource_state.updated.emit()
+    
+    if count == 7:
+        await get_tree().process_frame
+        # Level finised detection, kind of a wierd spot, but it works I guess
+        LevelManager.go_to_new_level()
