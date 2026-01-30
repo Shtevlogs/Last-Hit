@@ -63,7 +63,27 @@ alignment = 1
 [node name="SpawnWarrior" type="Button" parent="CanvasLayer/UI/VBoxContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
-text = "Warrior"
+theme_override_colors/font_hover_color = Color(0.78431374, 0.7490196, 0.7490196, 1)
+text = "(Q) Warrior 10g"
+flat = true
+
+[node name="SpawnCaster" type="Button" parent="CanvasLayer/UI/VBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_hover_color = Color(0.78431374, 0.7490196, 0.7490196, 1)
+text = "(W) Caster 10g"
+flat = true
+
+[node name="SpawnTank" type="Button" parent="CanvasLayer/UI/VBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_hover_color = Color(0.78431374, 0.7490196, 0.7490196, 1)
+text = "(E) Tank 25g"
+flat = true
+
+[node name="Spacer" type="Control" parent="CanvasLayer/UI/VBoxContainer"]
+custom_minimum_size = Vector2(20, 100)
+layout_mode = 2
 
 [node name="Gold" type="Label" parent="CanvasLayer/UI/VBoxContainer"]
 layout_mode = 2
@@ -73,3 +93,5 @@ horizontal_alignment = 1
 script = ExtResource("7_u5sy4")
 
 [connection signal="pressed" from="CanvasLayer/UI/VBoxContainer/SpawnWarrior" to="MinionPlacementManager" method="_on_spawn_warrior_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/VBoxContainer/SpawnCaster" to="MinionPlacementManager" method="_on_spawn_caster_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/VBoxContainer/SpawnTank" to="MinionPlacementManager" method="_on_spawn_tank_pressed"]
