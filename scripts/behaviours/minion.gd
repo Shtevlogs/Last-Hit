@@ -43,7 +43,7 @@ func _process(delta: float) -> void:
     var next_position := MinionHelper.get_next_position(state)
     var other_minion := GridHelper.get_minion_or_default(next_position)
     
-    if other_minion: # Blocked
+    if other_minion || next_position.y < 0: # Blocked
         return # Do nothing for now
     elif state.move_cooldown <= 0.0:
         MinionHelper.do_move(self, state)

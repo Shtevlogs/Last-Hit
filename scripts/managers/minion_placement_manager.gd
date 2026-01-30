@@ -18,9 +18,11 @@ func _process(_delta: float) -> void:
         minion_spawn_indicator.visible = true
         minion_spawn_indicator.position = GridHelper.grid_position_to_world_position(Vector2i(mouse_pos.x, GameConfig.GRID_HEIGHT - 1))
         if Input.is_action_just_pressed("click"):
-            _spend_gold_and_cooldowns(minion_class_to_spawn)
+            var minion_at_location := GridHelper.get_minion_or_default(Vector2i(mouse_pos.x, GameConfig.GRID_HEIGHT - 1))
+            if minion_at_location == null:
+                _spend_gold_and_cooldowns(minion_class_to_spawn)
+                _create_minion(mouse_pos.x)
             minion_spawn_indicator.visible = false
-            _create_minion(mouse_pos.x)
             Input.set_default_cursor_shape(Input.CURSOR_ARROW)
             set_process(false)
     else:
@@ -31,7 +33,6 @@ func _create_minion(lane: int) -> void:
     var new_minion := MinionHelper.create_minion_from_class(minion_class_to_spawn)
     new_minion.enemy = false
     new_minion.position = Vector2i(lane, GameConfig.GRID_HEIGHT - 1)
-    GameState.current.minions.append(new_minion)
     LevelManager.spawn_minion(new_minion)
 
 static func _can_spend_gold_and_cooldowns(minion_logic: _MinionClass) -> bool:
