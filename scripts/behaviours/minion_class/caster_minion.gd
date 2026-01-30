@@ -3,9 +3,9 @@ extends _MinionClass
 
 func get_polygon_data() -> PackedVector2Array:
     return PackedVector2Array([
-        Vector2(0.0, -10.0),
-        Vector2(-9.0, 9.0),
-        Vector2(9.0, 9.0)
+        Vector2(0.0, -8.0),
+        Vector2(-7.5, 7.5),
+        Vector2(7.5, 7.5)
     ])
 
 func get_action_cooldown() -> float:

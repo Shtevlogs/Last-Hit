@@ -3,7 +3,7 @@ class_name LevelConfig
 static var DATA : Array[WaveSetConfig] = [
     WaveSetConfig.new()
         .with_opening_gambit([
-            WaveConfig.new(WarriorMinion)
+            WaveConfig.new(TankMinion)
                 .after(1.0)
                 .on(3),
             WaveConfig.new(WarriorMinion)
