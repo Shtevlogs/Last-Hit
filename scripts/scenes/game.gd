@@ -6,9 +6,6 @@ const TILE : PackedScene = preload("uid://dqggwvc805fbi")
 @onready var level_root: Node2D = $LevelRoot
 
 func _ready() -> void:
-    #TODO: move me into save game management
-    GameState.current = GameState.new()
-    
     #TODO: like, move this to tile manager or some shit
     var offset := GameConfig.GRID_OFFSET - GameConfig.GRID_MIDPOINT
     for i : int in GameConfig.GRID_WIDTH:

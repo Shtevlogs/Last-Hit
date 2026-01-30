@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1kxjbme1gqgs"]
+
+[ext_resource type="Script" uid="uid://dcl2atidbyunt" path="res://scripts/vfx/floating_number.gd" id="1_5h7y2"]
+[ext_resource type="Theme" uid="uid://bpgkq5gwgyst4" path="res://assets/theme.tres" id="2_eu5su"]
+
+[node name="FloatingNumber" type="Node2D"]
+script = ExtResource("1_5h7y2")
+
+[node name="LabelOffset" type="Node2D" parent="."]
+
+[node name="Label" type="Label" parent="LabelOffset"]
+custom_minimum_size = Vector2(100, 100)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_eu5su")
+theme_override_colors/font_color = Color(0.6431373, 0.5529412, 0.7137255, 1)
+text = "1000g"
+horizontal_alignment = 1
+vertical_alignment = 1

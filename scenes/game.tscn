@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bkgnymwh1s6iy"]
+[gd_scene load_steps=9 format=3 uid="uid://bkgnymwh1s6iy"]
 
 [ext_resource type="Script" uid="uid://cjnck3w5qj1d3" path="res://scripts/scenes/game.gd" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://bid2rj5nw7s5n" path="res://prefabs/minion_spawn_indicator.tscn" id="2_iywne"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://bt1isueemlaxy" path="res://scripts/managers/minion_placement_manager.gd" id="3_lbhrr"]
 [ext_resource type="Theme" uid="uid://bpgkq5gwgyst4" path="res://assets/theme.tres" id="3_lnu2h"]
 [ext_resource type="Script" uid="uid://h1ufp1ln44gf" path="res://scripts/behaviours/mouse_click_indicator.gd" id="5_p57ef"]
+[ext_resource type="Script" uid="uid://clin1itgg8eht" path="res://scripts/managers/vfx_manager.gd" id="6_0tnpc"]
+[ext_resource type="Script" uid="uid://rg8wtenp6jxd" path="res://scripts/behaviours/ui/gold.gd" id="7_u5sy4"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_yqjtg")
@@ -31,6 +33,9 @@ script = ExtResource("5_p57ef")
 points = PackedVector2Array(0, 5, 3.5, 3.5, 5, 0, 3.5, -3.5, 0, -5, -3.5, -3.5, -5, 0, -3.5, 3.5, 0, 5)
 width = 2.0
 default_color = Color(0.6431373, 0.5529412, 0.7137255, 1)
+
+[node name="VfxManager" type="Node2D" parent="."]
+script = ExtResource("6_0tnpc")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -62,7 +67,9 @@ text = "Warrior"
 
 [node name="Gold" type="Label" parent="CanvasLayer/UI/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.6431373, 0.5529412, 0.7137255, 1)
 text = "0g"
 horizontal_alignment = 1
+script = ExtResource("7_u5sy4")
 
 [connection signal="pressed" from="CanvasLayer/UI/VBoxContainer/SpawnWarrior" to="MinionPlacementManager" method="_on_spawn_warrior_pressed"]

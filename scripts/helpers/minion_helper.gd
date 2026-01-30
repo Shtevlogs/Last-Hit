@@ -76,9 +76,11 @@ static func a_attacks_b(a: MinionState, b: MinionState) -> void:
     var a_logic := get_minion_logic(a)
     damage_minion(b, a_logic.get_attack_damage())
 
-static func damage_minion(state: MinionState, damage: float) -> void:
+static func damage_minion(state: MinionState, damage: float) -> bool:
     state.current_health = max(0, state.current_health - damage)
     if state.current_health == 0:
         state.destroyed.emit()
+        return true
     else:
         state.updated.emit()
+        return false
