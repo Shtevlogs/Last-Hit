@@ -6,8 +6,8 @@ extends Polygon2D
 var percent := 1.0
 
 #HACK WARNING HACK WARNING
-const LEFT_X := -5.5
-const RIGHT_X := 5.5
+const LEFT_X := -8
+const RIGHT_X := 8
 const RIGHT_V1 := 2
 const RIGHT_V2 := 3
 

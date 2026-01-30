@@ -8,7 +8,7 @@ var minion_class : _MinionClass
 @onready var health_bar: HealthBar = $HealthBar
 
 func _ready() -> void:
-    sprite.color = Color.RED if state.enemy else Color.BLUE
+    sprite.color = ColorConfig.ENEMY if state.enemy else ColorConfig.ALLY
     state.destroyed.connect(_on_destroy)
     state.updated.connect(_on_update)
     minion_class = MinionHelper.get_minion_logic(state)
@@ -24,21 +24,20 @@ func _process(delta: float) -> void:
         _on_destroy()
         return
 
-    if state.attack_cooldown <= 0.0:
-        if state.target_uid > 0:
-            var target := MinionHelper.get_minion_state_by_uid(state.target_uid)
-            if target && GridHelper.manhattan_distance(state.position, target.position) <= minion_class.get_range():
-                MinionHelper.do_attack(self, state, target)
-                return
-            else:
-                state.target_uid = 0
-
-        var nearest_enemy := GridHelper.get_nearest_minion(state.position, !state.enemy)
-        if nearest_enemy && GridHelper.manhattan_distance(state.position, nearest_enemy.position) <= minion_class.get_range():
-            #Lock target
-            state.target_uid = nearest_enemy.uid
-            MinionHelper.do_attack(self, state, nearest_enemy)
+    if state.target_uid > 0:
+        var target := MinionHelper.get_minion_state_by_uid(state.target_uid)
+        if target && GridHelper.manhattan_distance(state.position, target.position) <= minion_class.get_range():
+            MinionHelper.do_attack(self, state, target)
+        else:
+            state.target_uid = 0
             return
+
+    var nearest_enemy := GridHelper.get_nearest_minion(state.position, !state.enemy)
+    if nearest_enemy && GridHelper.manhattan_distance(state.position, nearest_enemy.position) <= minion_class.get_range():
+        #Lock target
+        state.target_uid = nearest_enemy.uid
+        MinionHelper.do_attack(self, state, nearest_enemy)
+        return
 
     var next_position := MinionHelper.get_next_position(state)
     var other_minion := GridHelper.get_minion_or_default(next_position)

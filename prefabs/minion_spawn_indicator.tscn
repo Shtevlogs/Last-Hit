@@ -3,5 +3,5 @@
 [node name="MinionSpawnIndicator" type="Node2D"]
 
 [node name="WarriorSprite" type="Polygon2D" parent="."]
-color = Color(0, 0, 0, 1)
+color = Color(0.20392157, 0.22352941, 0.2627451, 1)
 polygon = PackedVector2Array(4.5, 4.5, 4.5, -4.5, -4.5, -4.5, -4.5, 4.5)

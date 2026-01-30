@@ -30,7 +30,7 @@ script = ExtResource("5_p57ef")
 [node name="Line2D" type="Line2D" parent="MouseClickIndicator"]
 points = PackedVector2Array(0, 5, 3.5, 3.5, 5, 0, 3.5, -3.5, 0, -5, -3.5, -3.5, -5, 0, -3.5, 3.5, 0, 5)
 width = 1.0
-default_color = Color(0.52, 0.52, 0.52, 0.64705884)
+default_color = Color(0.6431373, 0.5529412, 0.7137255, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
