@@ -1,17 +1,8 @@
 @abstract
 class_name _MinionClass
+extends _Strategy
 
-static var str_to_minion_class := {}
-static var minion_class_to_instance := {}
-
-static func _static_init() -> void:
-    var minion_class_name := (_MinionClass as GDScript).get_global_name()
-    var class_list := ProjectSettings.get_global_class_list()
-    for class_dict: Dictionary in class_list:
-        if class_dict["base"] != minion_class_name: continue
-        var gdScript := load(class_dict["path"]) as GDScript
-        str_to_minion_class.set(gdScript.get_global_name(), gdScript)
-        minion_class_to_instance.set(gdScript, gdScript.new())
+static func save_singletons() -> bool: return true
 
 @abstract func get_polygon_data() -> PackedVector2Array
 @abstract func get_action_cooldown() -> float

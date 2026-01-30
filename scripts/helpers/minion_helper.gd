@@ -3,7 +3,7 @@ class_name MinionHelper
 static var minion_uid_counter : int = 0
 
 static func get_minion_logic(state: MinionState) -> _MinionClass:
-    return _MinionClass.minion_class_to_instance[state.minion_class]
+    return _Strategy.get_strategy_singleton(_MinionClass, state.minion_class)
 
 static func get_minion_state_by_uid(uid: int) -> MinionState:
     for minion : MinionState in GameState.current.minions:
@@ -12,7 +12,7 @@ static func get_minion_state_by_uid(uid: int) -> MinionState:
     return null
 
 static func create_minion_from_class(minion_class: GDScript) -> MinionState:
-    var minion_logic := _MinionClass.minion_class_to_instance[minion_class] as _MinionClass
+    var minion_logic := _Strategy.get_strategy_singleton(_MinionClass, minion_class) as _MinionClass
     var new_minion_state := MinionState.new()
     new_minion_state.minion_class = minion_class
     new_minion_state.total_health = minion_logic.get_total_health()

@@ -34,7 +34,7 @@ func deserialize(data: Dictionary) -> _State:
     enemy = bool(data["enemy"])
     total_health = int(data["total_health"])
     current_health = int(data["current_health"])
-    minion_class = _MinionClass.str_to_minion_class.get(data["minion_class"])
+    minion_class = _Strategy.get_strategy(_MinionClass, data["minion_class"])
     target_uid = int(data["target_uid"])
     uid = int(data["uid"])
     return self
