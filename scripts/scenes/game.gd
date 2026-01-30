@@ -19,8 +19,8 @@ func _ready() -> void:
     
 func _process(_delta: float) -> void:
     if Input.is_action_just_pressed("action 1"):
-        MinionPlacementManager._I._on_spawn_warrior_pressed()
+        MinionPlacementManager.spawn(WarriorMinion)
     if Input.is_action_just_pressed("action 2"):
-        MinionPlacementManager._I._on_spawn_caster_pressed()
+        MinionPlacementManager.spawn(CasterMinion)
     if Input.is_action_just_pressed("action 3"):
-        MinionPlacementManager._I._on_spawn_tank_pressed()
+        MinionPlacementManager.spawn(TankMinion)

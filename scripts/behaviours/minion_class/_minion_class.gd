@@ -15,3 +15,4 @@ static func save_singletons() -> bool: return true
 @abstract func get_spawn_cost() -> int
 @abstract func get_spawn_cooldown() -> float
 @abstract func get_range() -> int
+@abstract func get_cooldown_timer() -> TimerState

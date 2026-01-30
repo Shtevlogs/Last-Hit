@@ -37,3 +37,6 @@ func get_spawn_cooldown() -> float:
 
 func get_range() -> int:
     return GameConfig.CASTER_RANGE
+
+func get_cooldown_timer() -> TimerState:
+    return GameState.current.resource_state.caster_respawn_timer

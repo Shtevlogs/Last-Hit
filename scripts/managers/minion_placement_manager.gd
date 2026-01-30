@@ -18,6 +18,7 @@ func _process(_delta: float) -> void:
         minion_spawn_indicator.visible = true
         minion_spawn_indicator.position = GridHelper.grid_position_to_world_position(Vector2i(mouse_pos.x, GameConfig.GRID_HEIGHT - 1))
         if Input.is_action_just_pressed("click"):
+            _spend_gold_and_cooldowns(minion_class_to_spawn)
             minion_spawn_indicator.visible = false
             _create_minion(mouse_pos.x)
             Input.set_default_cursor_shape(Input.CURSOR_ARROW)
@@ -33,28 +34,23 @@ func _create_minion(lane: int) -> void:
     GameState.current.minions.append(new_minion)
     LevelManager.spawn_minion(new_minion)
 
-func _on_spawn_warrior_pressed() -> void:
-    var to_spawn := _Strategy.get_strategy_singleton(_MinionClass, WarriorMinion) as _MinionClass
-    if !_try_spend_gold_and_cooldowns(to_spawn): return
-    set_process(true)
-    minion_class_to_spawn = WarriorMinion
-
-func _on_spawn_caster_pressed() -> void:
-    var to_spawn := _Strategy.get_strategy_singleton(_MinionClass, CasterMinion) as _MinionClass
-    if !_try_spend_gold_and_cooldowns(to_spawn): return
-    set_process(true)
-    minion_class_to_spawn = CasterMinion
-
-func _on_spawn_tank_pressed() -> void:
-    var to_spawn := _Strategy.get_strategy_singleton(_MinionClass, TankMinion) as _MinionClass
-    if !_try_spend_gold_and_cooldowns(to_spawn): return
-    set_process(true)
-    minion_class_to_spawn = TankMinion
-
-func _try_spend_gold_and_cooldowns(minion_logic: _MinionClass) -> bool:
-    var cost := minion_logic.get_spawn_cost()
-    if GameState.current.resource_state.player_gold < cost:
+static func _can_spend_gold_and_cooldowns(minion_logic: _MinionClass) -> bool:
+    if GameState.current.resource_state.player_gold < minion_logic.get_spawn_cost():
         return false
+    if minion_logic.get_cooldown_timer().time < minion_logic.get_spawn_cooldown():
+        return false
+    return true
+
+static func _spend_gold_and_cooldowns(minion_class: GDScript) -> void:
+    var minion_logic := _Strategy.get_strategy_singleton(_MinionClass, minion_class) as _MinionClass
+    var cost := minion_logic.get_spawn_cost()
+    var cooldown_timer := minion_logic.get_cooldown_timer()
     GameState.current.resource_state.player_gold -= cost
     GameState.current.resource_state.updated.emit()
-    return true
+    cooldown_timer.time = 0.0
+
+static func spawn(minion_class: GDScript) -> void:
+    var to_spawn := _Strategy.get_strategy_singleton(_MinionClass, minion_class) as _MinionClass
+    if !_can_spend_gold_and_cooldowns(to_spawn): return
+    _I.set_process(true)
+    _I.minion_class_to_spawn = minion_class

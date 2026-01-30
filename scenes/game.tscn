@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bkgnymwh1s6iy"]
+[gd_scene load_steps=14 format=3 uid="uid://bkgnymwh1s6iy"]
 
 [ext_resource type="Script" uid="uid://cjnck3w5qj1d3" path="res://scripts/scenes/game.gd" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://bid2rj5nw7s5n" path="res://prefabs/minion_spawn_indicator.tscn" id="2_iywne"]
@@ -7,7 +7,12 @@
 [ext_resource type="Theme" uid="uid://bpgkq5gwgyst4" path="res://assets/theme.tres" id="3_lnu2h"]
 [ext_resource type="Script" uid="uid://h1ufp1ln44gf" path="res://scripts/behaviours/mouse_click_indicator.gd" id="5_p57ef"]
 [ext_resource type="Script" uid="uid://clin1itgg8eht" path="res://scripts/managers/vfx_manager.gd" id="6_0tnpc"]
+[ext_resource type="Script" uid="uid://bvrgg5lfejikw" path="res://scripts/managers/timer_manager.gd" id="7_0tnpc"]
 [ext_resource type="Script" uid="uid://rg8wtenp6jxd" path="res://scripts/behaviours/ui/gold.gd" id="7_u5sy4"]
+[ext_resource type="Script" uid="uid://0jw7xyikcogh" path="res://scripts/behaviours/ui/spawn_button.gd" id="9_vtaks"]
+[ext_resource type="Script" uid="uid://dgplqvgrc0uli" path="res://scripts/behaviours/minion_class/warrior_minion.gd" id="10_kvpfn"]
+[ext_resource type="Script" uid="uid://dvj1hwnolokdj" path="res://scripts/behaviours/minion_class/caster_minion.gd" id="11_dinhu"]
+[ext_resource type="Script" uid="uid://667ff05fjvtm" path="res://scripts/behaviours/minion_class/tank_minion.gd" id="12_kvuet"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_yqjtg")
@@ -37,6 +42,9 @@ default_color = Color(0.6431373, 0.5529412, 0.7137255, 1)
 [node name="VfxManager" type="Node2D" parent="."]
 script = ExtResource("6_0tnpc")
 
+[node name="TimerManager" type="Node" parent="."]
+script = ExtResource("7_0tnpc")
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="UI" type="Control" parent="CanvasLayer"]
@@ -64,22 +72,31 @@ alignment = 1
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_colors/font_hover_color = Color(0.78431374, 0.7490196, 0.7490196, 1)
-text = "(Q) Warrior 10g"
+text = "(Q) Warrior 10g
+-Ready-"
 flat = true
+script = ExtResource("9_vtaks")
+minion_class = ExtResource("10_kvpfn")
 
 [node name="SpawnCaster" type="Button" parent="CanvasLayer/UI/VBoxContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_colors/font_hover_color = Color(0.78431374, 0.7490196, 0.7490196, 1)
-text = "(W) Caster 10g"
+text = "(W) Caster 10g
+-Ready-"
 flat = true
+script = ExtResource("9_vtaks")
+minion_class = ExtResource("11_dinhu")
 
 [node name="SpawnTank" type="Button" parent="CanvasLayer/UI/VBoxContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_colors/font_hover_color = Color(0.78431374, 0.7490196, 0.7490196, 1)
-text = "(E) Tank 25g"
+text = "(E) Tank 25g
+-Ready-"
 flat = true
+script = ExtResource("9_vtaks")
+minion_class = ExtResource("12_kvuet")
 
 [node name="Spacer" type="Control" parent="CanvasLayer/UI/VBoxContainer"]
 custom_minimum_size = Vector2(20, 100)
@@ -91,7 +108,3 @@ theme_override_colors/font_color = Color(0.6431373, 0.5529412, 0.7137255, 1)
 text = "0g"
 horizontal_alignment = 1
 script = ExtResource("7_u5sy4")
-
-[connection signal="pressed" from="CanvasLayer/UI/VBoxContainer/SpawnWarrior" to="MinionPlacementManager" method="_on_spawn_warrior_pressed"]
-[connection signal="pressed" from="CanvasLayer/UI/VBoxContainer/SpawnCaster" to="MinionPlacementManager" method="_on_spawn_caster_pressed"]
-[connection signal="pressed" from="CanvasLayer/UI/VBoxContainer/SpawnTank" to="MinionPlacementManager" method="_on_spawn_tank_pressed"]
