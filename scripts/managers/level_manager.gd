@@ -42,7 +42,7 @@ func _process_loop() -> void:
         loop_idx = (loop_idx + 1) % l.size()
 
 func _spawn_wave(wave: WaveConfig) -> void:
-    var new_minion := MinionState.new()
+    var new_minion := MinionHelper.create_minion_from_class(wave.minion_class)
     new_minion.position = wave.position
     new_minion.enemy = wave.is_enemy
     GameState.current.minions.append(new_minion)

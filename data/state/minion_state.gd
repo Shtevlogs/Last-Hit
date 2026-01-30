@@ -8,6 +8,9 @@ var move_cooldown: float = 0.0
 var enemy: bool = false
 var total_health: int = 100
 var current_health: int = 100
+var minion_class: GDScript = WarriorMinion
+var target_uid: int = 0
+var uid : int = 0
 
 func serialize() -> Dictionary:
     return {
@@ -18,6 +21,9 @@ func serialize() -> Dictionary:
         "enemy": enemy,
         "total_health": total_health,
         "current_health": current_health,
+        "minion_class": minion_class.get_global_name(),
+        "target_uid": target_uid,
+        "uid": uid
     }
 
 func deserialize(data: Dictionary) -> _State:
@@ -28,4 +34,7 @@ func deserialize(data: Dictionary) -> _State:
     enemy = bool(data["enemy"])
     total_health = int(data["total_health"])
     current_health = int(data["current_health"])
+    minion_class = _MinionClass.str_to_minion_class.get(data["minion_class"])
+    target_uid = int(data["target_uid"])
+    uid = int(data["uid"])
     return self

@@ -1,9 +1,12 @@
 class_name WaveConfig
 
 var timing_offset : float = 0.0
-#TODO: var minion_type
 var position : Vector2i
 var is_enemy : bool = true
+var minion_class : GDScript
+
+func _init(minion_script: GDScript) -> void:
+    minion_class = minion_script
 
 func after(offset: float) -> WaveConfig:
     timing_offset = offset

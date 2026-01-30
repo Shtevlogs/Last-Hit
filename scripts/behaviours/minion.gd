@@ -2,14 +2,17 @@ class_name Minion
 extends Node2D
 
 var state : MinionState
+var minion_class : _MinionClass
 
-@onready var warrior_sprite: Polygon2D = $WarriorSprite
+@onready var sprite: Polygon2D = $Sprite
 @onready var health_bar: HealthBar = $HealthBar
 
 func _ready() -> void:
-    warrior_sprite.color = Color.RED if state.enemy else Color.BLUE
+    sprite.color = Color.RED if state.enemy else Color.BLUE
     state.destroyed.connect(_on_destroy)
     state.updated.connect(_on_update)
+    minion_class = MinionHelper.get_minion_logic(state)
+    sprite.polygon = minion_class.get_polygon_data()
 
 func _process(delta: float) -> void:
     MinionHelper.tick_cooldowns(delta, state)
@@ -20,17 +23,29 @@ func _process(delta: float) -> void:
         #TODO: damage or lane closing logic
         _on_destroy()
         return
-    
+
+    if state.attack_cooldown <= 0.0:
+        if state.target_uid > 0:
+            var target := MinionHelper.get_minion_state_by_uid(state.target_uid)
+            if target && GridHelper.manhattan_distance(state.position, target.position) <= minion_class.get_range():
+                MinionHelper.do_attack(self, state, target)
+                return
+            else:
+                state.target_uid = 0
+
+        var nearest_enemy := GridHelper.get_nearest_minion(state.position, !state.enemy)
+        if nearest_enemy && GridHelper.manhattan_distance(state.position, nearest_enemy.position) <= minion_class.get_range():
+            #Lock target
+            state.target_uid = nearest_enemy.uid
+            MinionHelper.do_attack(self, state, nearest_enemy)
+            return
+
     var next_position := MinionHelper.get_next_position(state)
     var other_minion := GridHelper.get_minion_or_default(next_position)
     
-    #TODO: class-based attack targeting somewhere around here
-    if other_minion:
-        if other_minion.enemy == state.enemy:
-            return # Do nothing for now
-        else:
-            MinionHelper.do_attack(self, state, other_minion)
-    else:
+    if other_minion: # Blocked
+        return # Do nothing for now
+    elif state.move_cooldown <= 0.0:
         MinionHelper.do_move(self, state)
 
 func _on_destroy() -> void:

@@ -6,7 +6,7 @@
 [node name="Minion" type="Node2D"]
 script = ExtResource("1_vhrli")
 
-[node name="WarriorSprite" type="Polygon2D" parent="."]
+[node name="Sprite" type="Polygon2D" parent="."]
 color = Color(0.0333333, 0, 1, 1)
 polygon = PackedVector2Array(4.5, 4.5, 4.5, -4.5, -4.5, -4.5, -4.5, 4.5)
 

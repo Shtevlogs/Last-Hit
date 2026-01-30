@@ -21,3 +21,30 @@ static func get_minion_or_default(position: Vector2i) -> MinionState:
     if idx == -1:
         return null
     return GameState.current.minions[idx]
+
+static func manhattan_distance(a: Vector2i, b: Vector2i) -> int:
+    return absi(b.x - a.x) + absi(b.y - a.y)
+
+static func get_minions_at_distance(center: Vector2i, distance: int) -> Array[MinionState]:
+    var result: Array[MinionState] = []
+    for minion : MinionState in GameState.current.minions:
+        if manhattan_distance(center, minion.position) == distance:
+            result.append(minion)
+    return result
+
+static func get_minions_within_distance(center: Vector2i, max_distance: int) -> Array[MinionState]:
+    var result: Array[MinionState] = []
+    for d : int in range(max_distance, -1, -1):
+        result.append_array(get_minions_at_distance(center, d))
+    return result
+
+static func get_nearest_minion(center: Vector2i, enemy: bool) -> MinionState:
+    var result: MinionState = null
+    var min_distance: int = 9999
+    for minion : MinionState in GameState.current.minions:
+        if minion.enemy != enemy: continue
+        var dist := manhattan_distance(center, minion.position)
+        if dist < min_distance:
+            min_distance = dist
+            result = minion
+    return result
