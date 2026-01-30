@@ -23,7 +23,7 @@ func _process(_delta: float) -> void:
         var cd_num := roundi(cd_percent*10.0)
         var pipes := ""
         for i in cd_num:
-            pipes += "|"
+            pipes += "]"
         var spaces := ""
         for i in (10 - cd_num):
             spaces += " "
