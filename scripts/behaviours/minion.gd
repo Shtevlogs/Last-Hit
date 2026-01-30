@@ -20,7 +20,8 @@ func _process(delta: float) -> void:
         return
         
     if GridHelper.is_out_of_bounds(state.position):
-        #TODO: damage or lane closing logic
+        if state.enemy:
+            PlayerClickHelper.on_player_damaged()
         _on_destroy()
         return
 

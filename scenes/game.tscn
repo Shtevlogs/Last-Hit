@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bkgnymwh1s6iy"]
+[gd_scene load_steps=15 format=3 uid="uid://bkgnymwh1s6iy"]
 
 [ext_resource type="Script" uid="uid://cjnck3w5qj1d3" path="res://scripts/scenes/game.gd" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://bid2rj5nw7s5n" path="res://prefabs/minion_spawn_indicator.tscn" id="2_iywne"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://dgplqvgrc0uli" path="res://scripts/behaviours/minion_class/warrior_minion.gd" id="10_kvpfn"]
 [ext_resource type="Script" uid="uid://dvj1hwnolokdj" path="res://scripts/behaviours/minion_class/caster_minion.gd" id="11_dinhu"]
 [ext_resource type="Script" uid="uid://667ff05fjvtm" path="res://scripts/behaviours/minion_class/tank_minion.gd" id="12_kvuet"]
+[ext_resource type="Script" uid="uid://sl2psjwyqsu1" path="res://scripts/behaviours/ui/player_hp.gd" id="14_trtic"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_yqjtg")
@@ -108,3 +109,44 @@ theme_override_colors/font_color = Color(0.6431373, 0.5529412, 0.7137255, 1)
 text = "0g"
 horizontal_alignment = 1
 script = ExtResource("7_u5sy4")
+
+[node name="PlayerHP" type="Control" parent="CanvasLayer/UI/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+script = ExtResource("14_trtic")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/UI/VBoxContainer/PlayerHP"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Heart" type="Control" parent="CanvasLayer/UI/VBoxContainer/PlayerHP/HBoxContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="CanvasLayer/UI/VBoxContainer/PlayerHP/HBoxContainer/Heart"]
+position = Vector2(10, 7)
+color = Color(0.6509804, 0.39215687, 0.4392157, 1)
+polygon = PackedVector2Array(0, 0, 4, -4, 8, 0, 0, 10, -8, 0, -4, -4)
+
+[node name="Heart2" type="Control" parent="CanvasLayer/UI/VBoxContainer/PlayerHP/HBoxContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="CanvasLayer/UI/VBoxContainer/PlayerHP/HBoxContainer/Heart2"]
+position = Vector2(10, 7)
+color = Color(0.6509804, 0.39215687, 0.4392157, 1)
+polygon = PackedVector2Array(0, 0, 4, -4, 8, 0, 0, 10, -8, 0, -4, -4)
+
+[node name="Heart3" type="Control" parent="CanvasLayer/UI/VBoxContainer/PlayerHP/HBoxContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="CanvasLayer/UI/VBoxContainer/PlayerHP/HBoxContainer/Heart3"]
+position = Vector2(10, 7)
+color = Color(0.6509804, 0.39215687, 0.4392157, 1)
+polygon = PackedVector2Array(0, 0, 4, -4, 8, 0, 0, 10, -8, 0, -4, -4)

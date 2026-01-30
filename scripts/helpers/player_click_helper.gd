@@ -17,3 +17,8 @@ static func on_player_click(position: Vector2i) -> void:
     else:
         #maybe some sort of penalty here?
         pass
+
+static func on_player_damaged() -> void:
+    var resource_state := GameState.current.resource_state
+    resource_state.player_hits = maxi(0, resource_state.player_hits - 1)
+    resource_state.updated.emit()
