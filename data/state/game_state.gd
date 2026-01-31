@@ -13,7 +13,8 @@ func serialize() -> Dictionary:
         "level_number": level_number,
         "resource_state": resource_state.serialize(),
         "minions": serialize_array(minions),
-        "level_state": level_state.serialize()
+        "level_state": level_state.serialize(),
+        "upgrade_state": upgrade_state.serialize()
     }
 
 func deserialize(data: Dictionary) -> _State:
@@ -21,4 +22,5 @@ func deserialize(data: Dictionary) -> _State:
     resource_state = ResourceState.new().deserialize(data["resource_state"])
     minions = deserialize_array(MinionState, minions, data["minions"])
     level_state = LevelState.new().deserialize(data["level_state"])
+    upgrade_state = UpgradeState.new().deserialize(data["upgrade_state"])
     return self

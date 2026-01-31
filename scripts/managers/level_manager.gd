@@ -68,8 +68,9 @@ static func start_level(num: int) -> void:
     _I.state.initialized = true
 
 static func clear_level() -> void:
-    GameState.current.resource_state.player_gold = 0
-    GameState.current.resource_state.updated.emit()
+    #TODO: change this to mana and do rewards separately
+    #GameState.current.resource_state.player_gold = 0
+    #GameState.current.resource_state.updated.emit()
     var minions := GameState.current.minions.duplicate()
     for minion: MinionState in minions:
         minion.destroyed.emit()

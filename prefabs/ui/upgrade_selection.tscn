@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://d10fae58wfx3u"]
+
+[ext_resource type="Script" uid="uid://o2nix3tle30p" path="res://scripts/behaviours/ui/upgrade_selection.gd" id="1_x6sw6"]
+
+[node name="UpgradeSelection" type="Control"]
+custom_minimum_size = Vector2(80, 100)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_x6sw6")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(40, 40)
+color = Color(0.3647059, 0.5529412, 0.63529414, 1)
+polygon = PackedVector2Array(10, 10, -10, 10, -10, -10, 10, -10)
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "test"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

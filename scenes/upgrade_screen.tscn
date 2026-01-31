@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://de8jh1llp673f"]
+[gd_scene load_steps=10 format=3 uid="uid://de8jh1llp673f"]
 
 [ext_resource type="Theme" uid="uid://bpgkq5gwgyst4" path="res://assets/theme.tres" id="1_mh8j6"]
 [ext_resource type="Script" uid="uid://bty1f4tsq6hod" path="res://scripts/scenes/upgrade_screen.gd" id="2_4pa2q"]
+[ext_resource type="PackedScene" uid="uid://d10fae58wfx3u" path="res://prefabs/ui/upgrade_selection.tscn" id="3_3vsiv"]
+[ext_resource type="Script" uid="uid://r7cx8nlq5353" path="res://scripts/behaviours/upgrade_logic/warrior_upgrade.gd" id="4_1ogmj"]
+[ext_resource type="Script" uid="uid://dus2m7oilhu88" path="res://scripts/behaviours/upgrade_logic/caster_upgrade.gd" id="5_ald31"]
+[ext_resource type="Script" uid="uid://dsnhqxkdvfd2g" path="res://scripts/behaviours/upgrade_logic/tank_upgrade.gd" id="6_viwe2"]
+[ext_resource type="Script" uid="uid://ci43q8ta6xh8f" path="res://scripts/behaviours/upgrade_logic/click_damage_upgrade.gd" id="7_viwe2"]
+[ext_resource type="Script" uid="uid://cwwyf6felmysp" path="res://scripts/behaviours/upgrade_logic/click_charge_time_upgrade.gd" id="8_pfdwi"]
+[ext_resource type="Script" uid="uid://rg8wtenp6jxd" path="res://scripts/behaviours/ui/gold.gd" id="9_pfdwi"]
 
 [node name="UpgradeScreen" type="Control"]
 layout_mode = 3
@@ -29,99 +36,29 @@ alignment = 1
 layout_mode = 2
 alignment = 1
 
-[node name="UpgradeSelection" type="Control" parent="FlowContainer/HBoxContainer"]
-custom_minimum_size = Vector2(80, 100)
+[node name="UpgradeSelection" parent="FlowContainer/HBoxContainer" instance=ExtResource("3_3vsiv")]
 layout_mode = 2
+upgrade_script = ExtResource("4_1ogmj")
 
-[node name="Polygon2D" type="Polygon2D" parent="FlowContainer/HBoxContainer/UpgradeSelection"]
-polygon = PackedVector2Array(19, 20.5, 19, 49.5, 48, 49.5, 48, 20.5)
-
-[node name="Button" type="Button" parent="FlowContainer/HBoxContainer/UpgradeSelection"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -16.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "test"
-
-[node name="UpgradeSelection2" type="Control" parent="FlowContainer/HBoxContainer"]
-custom_minimum_size = Vector2(80, 100)
+[node name="UpgradeSelection2" parent="FlowContainer/HBoxContainer" instance=ExtResource("3_3vsiv")]
 layout_mode = 2
+upgrade_script = ExtResource("5_ald31")
 
-[node name="Polygon2D" type="Polygon2D" parent="FlowContainer/HBoxContainer/UpgradeSelection2"]
-polygon = PackedVector2Array(19, 20.5, 19, 49.5, 48, 49.5, 48, 20.5)
-
-[node name="Button" type="Button" parent="FlowContainer/HBoxContainer/UpgradeSelection2"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -16.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "test"
-
-[node name="UpgradeSelection3" type="Control" parent="FlowContainer/HBoxContainer"]
-custom_minimum_size = Vector2(80, 100)
+[node name="UpgradeSelection3" parent="FlowContainer/HBoxContainer" instance=ExtResource("3_3vsiv")]
 layout_mode = 2
-
-[node name="Polygon2D" type="Polygon2D" parent="FlowContainer/HBoxContainer/UpgradeSelection3"]
-polygon = PackedVector2Array(19, 20.5, 19, 49.5, 48, 49.5, 48, 20.5)
-
-[node name="Button" type="Button" parent="FlowContainer/HBoxContainer/UpgradeSelection3"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -16.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "test"
+upgrade_script = ExtResource("6_viwe2")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="FlowContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="UpgradeSelection" type="Control" parent="FlowContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(80, 100)
+[node name="UpgradeSelection" parent="FlowContainer/HBoxContainer2" instance=ExtResource("3_3vsiv")]
 layout_mode = 2
+upgrade_script = ExtResource("7_viwe2")
 
-[node name="Polygon2D" type="Polygon2D" parent="FlowContainer/HBoxContainer2/UpgradeSelection"]
-polygon = PackedVector2Array(19, 20.5, 19, 49.5, 48, 49.5, 48, 20.5)
-
-[node name="Button" type="Button" parent="FlowContainer/HBoxContainer2/UpgradeSelection"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -16.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "test"
-
-[node name="UpgradeSelection2" type="Control" parent="FlowContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(80, 100)
+[node name="UpgradeSelection2" parent="FlowContainer/HBoxContainer2" instance=ExtResource("3_3vsiv")]
 layout_mode = 2
-
-[node name="Polygon2D" type="Polygon2D" parent="FlowContainer/HBoxContainer2/UpgradeSelection2"]
-polygon = PackedVector2Array(19, 20.5, 19, 49.5, 48, 49.5, 48, 20.5)
-
-[node name="Button" type="Button" parent="FlowContainer/HBoxContainer2/UpgradeSelection2"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -16.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "test"
+upgrade_script = ExtResource("8_pfdwi")
 
 [node name="NextLevelButton" type="Button" parent="."]
 layout_mode = 1
@@ -133,5 +70,22 @@ offset_right = 44.0
 offset_bottom = 16.0
 grow_horizontal = 2
 text = "Next Level"
+
+[node name="Gold" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -8.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.44705883, 0.45882353, 0.27450982, 1)
+text = "0g"
+horizontal_alignment = 1
+script = ExtResource("9_pfdwi")
 
 [connection signal="pressed" from="NextLevelButton" to="." method="_on_next_level_button_pressed"]

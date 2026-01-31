@@ -1,17 +1,23 @@
 class_name ClickChargeTimeUpgrade
 extends _UpgradeLogic
 
-func get_upgrade_cost(upgrade_level: int) -> int:
-    return 100
+func can_upgrade() -> bool:
+    return GameState.current.upgrade_state.click_hold_time_upgrade_level < GameConfig.MAX_UPGRADE_LEVEL
 
-func apply_upgrade(upgrade_level: int) -> void:
+func increment_level() -> void:
+    GameState.current.upgrade_state.click_hold_time_upgrade_level += 1
+
+func get_upgrade_cost() -> int:
+    return 10
+
+func apply_upgrade() -> void:
     pass
 
-func unapply_upgrade(upgrade_level: int) -> void:
+func unapply_upgrade() -> void:
     pass
 
-func get_upgrade_button_text(upgrade_level: int) -> String:
-    return "Click Charge Time Upgrade"
+func get_upgrade_button_text() -> String:
+    return "Ch %0.1d-%0.1d" % [0.8, 1.0]
 
 func get_upgrade_polygon_data() -> PackedVector2Array:
     return PackedVector2Array()
