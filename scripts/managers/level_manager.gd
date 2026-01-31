@@ -14,7 +14,7 @@ func _ready() -> void:
     set_process(false)
 
 func _process(delta : float) -> void:
-    state.level_time += delta
+    state.level_time += delta * (1.0 + float(RansackManager.ransacking_count) * 0.3)
     
     if !state.current_wave_set.opening_gambit.is_empty():
         _process_opening_gambit()
@@ -40,11 +40,18 @@ func _process_loop() -> void:
         state.loop_idx = (state.loop_idx + 1) % l.size()
 
 func _spawn_wave(wave: WaveState) -> void:
-    var minion_at_location := GridHelper.get_minion_or_default(wave.position)
-    if minion_at_location != null:
-        return
+    var location := wave.position
+    var minion_at_location := GridHelper.get_minion_or_default(location)
+    if minion_at_location != null: # Do a cheeky little second try
+        if wave.position.x == 3:
+            location = Vector2i(0 if randf() > 0.5 else 6, wave.position.y)
+        else:
+            location = Vector2i(6 - wave.position.x, wave.position.y)
+        minion_at_location = GridHelper.get_minion_or_default(location)
+        if minion_at_location != null:
+            return
     var new_minion := MinionHelper.create_minion_from_class(wave.minion_class)
-    new_minion.position = wave.position
+    new_minion.position = location
     new_minion.enemy = wave.is_enemy
     _spawn_minion(new_minion)
 
