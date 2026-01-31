@@ -2,11 +2,13 @@ class_name SpawnButton
 extends Button
 
 @export var minion_class : GDScript
+@export var upgrade_class : GDScript
 var minion_logic : _MinionClass
 
 func _ready() -> void:
     pressed.connect(_on_pressed)
     minion_logic = _Strategy.get_strategy_singleton(_MinionClass, minion_class)
+    visible = minion_logic.get_upgrade_level() > 0
 
 func _on_pressed() -> void:
     MinionPlacementManager.spawn(minion_class)

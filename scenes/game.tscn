@@ -51,6 +51,7 @@ script = ExtResource("7_0tnpc")
 script = ExtResource("8_ir15t")
 
 [node name="Timer" type="Timer" parent="RansackManager"]
+wait_time = 6.0
 autostart = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

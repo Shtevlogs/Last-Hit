@@ -16,3 +16,5 @@ static func save_singletons() -> bool: return true
 @abstract func get_spawn_cooldown() -> float
 @abstract func get_range() -> int
 @abstract func get_cooldown_timer() -> TimerState
+@abstract func get_can_spawn() -> bool
+@abstract func get_upgrade_level() -> int

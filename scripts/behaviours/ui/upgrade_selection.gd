@@ -21,10 +21,8 @@ func _on_button_pressed() -> void:
     if GameState.current.resource_state.player_gold < cost:
         return
     GameState.current.resource_state.player_gold -= cost
-    GameState.current.resource_state.updated.emit()
-    logic.unapply_upgrade()
     logic.increment_level()
-    logic.apply_upgrade()
+    GameState.current.resource_state.updated.emit()
 
 func _refresh_ui() -> void:
     if logic.can_upgrade() && GameState.current.resource_state.player_gold > logic.get_upgrade_cost():

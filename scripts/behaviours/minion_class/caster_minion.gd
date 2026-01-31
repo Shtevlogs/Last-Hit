@@ -29,10 +29,18 @@ func get_spawn_cost() -> int:
     return GameConfig.CASTER_SPAWN_COST
 
 func get_spawn_cooldown() -> float:
-    return GameConfig.CASTER_SPAWN_COOLDOWN
+    return GameConfig.CASTER_SPAWN_COOLDOWN - \
+        (GameState.current.upgrade_state.caster_upgrade_level - 1) * \
+        GameConfig.CASTER_SPAWN_COOLDOWN_REDUCTION_PER_UPGRADE
 
 func get_range() -> int:
     return GameConfig.CASTER_RANGE
 
 func get_cooldown_timer() -> TimerState:
     return GameState.current.resource_state.caster_respawn_timer
+
+func get_can_spawn() -> bool:
+    return GameState.current.upgrade_state.caster_upgrade_level > 0
+
+func get_upgrade_level() -> int:
+    return GameState.current.upgrade_state.caster_upgrade_level

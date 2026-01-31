@@ -2,7 +2,6 @@ class_name MouseClickIndicator
 extends Node2D
 
 #TODO: this needs to be upgradeable i think
-const FULL_CLICK_TIME := 0.8
 const CLICK_PERCENT_OFFSET := 0.15
 
 @onready var line: Line2D = $Line2D
@@ -45,7 +44,11 @@ func _process(delta: float) -> void:
     visible = true
     click_time += delta
     
-    var actual_click_percent := click_time / FULL_CLICK_TIME
+    var actual_click_time := GameConfig.PLAYER_FULL_CLICK_TIME - \
+        (GameState.current.upgrade_state.click_hold_time_upgrade_level - 1) * \
+        GameConfig.PLAYER_FULL_CLICK_TIME_REDUCTION_PER_UPGRADE
+    
+    var actual_click_percent := click_time / actual_click_time
     if actual_click_percent >= 1.0:
         is_fully_charged = true
         actual_click_percent = 1.0  # Hold at full, don't keep counting
