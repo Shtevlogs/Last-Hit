@@ -2,7 +2,6 @@ class_name Main
 extends Node
 
 func _ready() -> void:
-    #TODO: move me into save game management
-    GameState.current = GameState.new()
+    SaveHelper.load_save()
     
     SceneManager.load_scene(SceneManager.SceneId.MAIN_MENU)

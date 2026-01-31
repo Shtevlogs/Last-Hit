@@ -48,15 +48,16 @@ func _spawn_wave(wave: WaveState) -> void:
     new_minion.enemy = wave.is_enemy
     _spawn_minion(new_minion)
 
-func _spawn_minion(minion: MinionState) -> void:
-    GameState.current.minions.append(minion)
+func _spawn_minion(minion: MinionState, and_append: bool = true) -> void:
+    if and_append:
+        GameState.current.minions.append(minion)
     var new_minion := MINION.instantiate() as Minion
     new_minion.state = minion
     new_minion.position = GridHelper.grid_position_to_world_position(minion.position)
     level_root.add_child(new_minion)
 
-static func spawn_minion(minion: MinionState) -> void:
-    _I._spawn_minion(minion)
+static func spawn_minion(minion: MinionState, and_append: bool = true) -> void:
+    _I._spawn_minion(minion, and_append)
 
 static func start_level(num: int) -> void:
     num = num % LevelConfig.DATA.size()
@@ -64,7 +65,6 @@ static func start_level(num: int) -> void:
     _I.state.level_time = 0.0
     _I.state.loop_idx = 0
     _I.state.last_time_offset = 0.0
-    _I.set_process(true)
     _I.state.initialized = true
 
 static func clear_level() -> void:
@@ -76,7 +76,16 @@ static func clear_level() -> void:
     #GameState.current.minions = []
 
 static func go_to_new_level() -> void:
-    if GameState.current.level_state.initialized:
-        clear_level()
-        GameState.current.level_number += 1
+    clear_level()
+    GameState.current.level_number += 1
     start_level(GameState.current.level_number)
+    _I.set_process(true)
+
+static func initialize_level() -> void:
+    if GameState.current.level_state.initialized:
+        for minion: MinionState in GameState.current.minions:
+            spawn_minion(minion, false)
+    else:
+        clear_level()
+        start_level(GameState.current.level_number)
+    _I.set_process(true)

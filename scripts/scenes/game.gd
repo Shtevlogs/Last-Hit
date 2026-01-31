@@ -6,7 +6,7 @@ const TILE : PackedScene = preload("uid://dqggwvc805fbi")
 @onready var level_root: Node2D = $LevelRoot
 
 func _ready() -> void:
-    #TODO: like, move this to tile manager or some shit
+    #TODO: like, move this to a tile manager or some shit
     var offset := GameConfig.GRID_OFFSET - GameConfig.GRID_MIDPOINT
     for i : int in GameConfig.GRID_WIDTH:
         for j: int in GameConfig.GRID_HEIGHT:
@@ -15,7 +15,7 @@ func _ready() -> void:
             new_tile.position = pos
             level_root.add_child(new_tile)
     
-    LevelManager.go_to_new_level()
+    LevelManager.initialize_level()
     
 func _process(_delta: float) -> void:
     if Input.is_action_just_pressed("action 1"):
