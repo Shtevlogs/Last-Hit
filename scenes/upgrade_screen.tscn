@@ -1,0 +1,137 @@
+[gd_scene load_steps=3 format=3 uid="uid://de8jh1llp673f"]
+
+[ext_resource type="Theme" uid="uid://bpgkq5gwgyst4" path="res://assets/theme.tres" id="1_mh8j6"]
+[ext_resource type="Script" uid="uid://bty1f4tsq6hod" path="res://scripts/scenes/upgrade_screen.gd" id="2_4pa2q"]
+
+[node name="UpgradeScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_mh8j6")
+script = ExtResource("2_4pa2q")
+
+[node name="FlowContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -15.5
+offset_bottom = 20.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="FlowContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="UpgradeSelection" type="Control" parent="FlowContainer/HBoxContainer"]
+custom_minimum_size = Vector2(80, 100)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="FlowContainer/HBoxContainer/UpgradeSelection"]
+polygon = PackedVector2Array(19, 20.5, 19, 49.5, 48, 49.5, 48, 20.5)
+
+[node name="Button" type="Button" parent="FlowContainer/HBoxContainer/UpgradeSelection"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "test"
+
+[node name="UpgradeSelection2" type="Control" parent="FlowContainer/HBoxContainer"]
+custom_minimum_size = Vector2(80, 100)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="FlowContainer/HBoxContainer/UpgradeSelection2"]
+polygon = PackedVector2Array(19, 20.5, 19, 49.5, 48, 49.5, 48, 20.5)
+
+[node name="Button" type="Button" parent="FlowContainer/HBoxContainer/UpgradeSelection2"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "test"
+
+[node name="UpgradeSelection3" type="Control" parent="FlowContainer/HBoxContainer"]
+custom_minimum_size = Vector2(80, 100)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="FlowContainer/HBoxContainer/UpgradeSelection3"]
+polygon = PackedVector2Array(19, 20.5, 19, 49.5, 48, 49.5, 48, 20.5)
+
+[node name="Button" type="Button" parent="FlowContainer/HBoxContainer/UpgradeSelection3"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "test"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="FlowContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="UpgradeSelection" type="Control" parent="FlowContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(80, 100)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="FlowContainer/HBoxContainer2/UpgradeSelection"]
+polygon = PackedVector2Array(19, 20.5, 19, 49.5, 48, 49.5, 48, 20.5)
+
+[node name="Button" type="Button" parent="FlowContainer/HBoxContainer2/UpgradeSelection"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "test"
+
+[node name="UpgradeSelection2" type="Control" parent="FlowContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(80, 100)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="FlowContainer/HBoxContainer2/UpgradeSelection2"]
+polygon = PackedVector2Array(19, 20.5, 19, 49.5, 48, 49.5, 48, 20.5)
+
+[node name="Button" type="Button" parent="FlowContainer/HBoxContainer2/UpgradeSelection2"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "test"
+
+[node name="NextLevelButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -44.0
+offset_right = 44.0
+offset_bottom = 16.0
+grow_horizontal = 2
+text = "Next Level"
+
+[connection signal="pressed" from="NextLevelButton" to="." method="_on_next_level_button_pressed"]

@@ -14,5 +14,6 @@ func _on_timer_timeout() -> void:
     
     if count == 7:
         await get_tree().process_frame
-        # Level finised detection, kind of a wierd spot, but it works I guess
+        # Level finished detection, kind of a wierd spot, but it works I guess
         LevelManager.go_to_new_level()
+        SceneManager.load_scene(SceneManager.SceneId.UPGRADE_SCREEN)

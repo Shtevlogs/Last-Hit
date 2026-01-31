@@ -6,6 +6,7 @@ var level_number := 0
 var resource_state : ResourceState = ResourceState.new()
 var minions : Array[MinionState] = []
 var level_state : LevelState = LevelState.new()
+var upgrade_state : UpgradeState = UpgradeState.new()
 
 func serialize() -> Dictionary:
     return {

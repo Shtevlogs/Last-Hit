@@ -1,21 +1,8 @@
 class_name WarriorMinion
 extends _MinionClass
 
-static var _cached_polygon_data: PackedVector2Array
-
-static func _create_circle() -> PackedVector2Array:
-    var polygon_data: PackedVector2Array = []
-    for i in range(360):
-        var angle := i * 2.0 * PI / 360.0
-        var x := cos(angle)
-        var y := sin(angle)
-        polygon_data.append(Vector2(x * 7.5, y * 7.5))
-    return polygon_data
-
 func get_polygon_data() -> PackedVector2Array:
-    if _cached_polygon_data.is_empty():
-        _cached_polygon_data = _create_circle()
-    return _cached_polygon_data
+    return GeometryHelper.get_circle_polygon_data(GameConfig.WARRIOR_SIZE)
 
 func get_action_cooldown() -> float:
     return GameConfig.WARRIOR_ACTION_COOLDOWN

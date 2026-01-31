@@ -2,12 +2,7 @@ class_name TankMinion
 extends _MinionClass
 
 func get_polygon_data() -> PackedVector2Array:
-    return PackedVector2Array([
-        Vector2(9.0, 9.0),
-        Vector2(9.0, -9.0),
-        Vector2(-9.0, -9.0),
-        Vector2(-9.0, 9.0)
-    ])
+    return GeometryHelper.get_square_polygon_data(GameConfig.TANK_SIZE)
 
 func get_action_cooldown() -> float:
     return GameConfig.TANK_ACTION_COOLDOWN
