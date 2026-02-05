@@ -14,8 +14,3 @@ func _on_timer_timeout() -> void:
             
     GameState.current.resource_state.player_mana += ransacking_count
     GameState.current.resource_state.updated.emit()
-    
-    if ransacking_count == 7:
-        await get_tree().process_frame
-        # Level finished detection, kind of a wierd spot, but it works I guess
-        LevelEndManager.show_end_level()

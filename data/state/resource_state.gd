@@ -4,6 +4,7 @@ extends _State
 var player_mana : int = GameConfig.STARTING_MANA
 var player_gold : int = 0
 var player_hits : int = 3
+var enemy_hits : int = 3
 var warrior_respawn_timer : TimerState = TimerState.new()
 var caster_respawn_timer : TimerState = TimerState.new()
 var tank_respawn_timer : TimerState = TimerState.new()

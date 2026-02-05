@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bkgnymwh1s6iy"]
+[gd_scene load_steps=19 format=3 uid="uid://bkgnymwh1s6iy"]
 
 [ext_resource type="Script" uid="uid://cjnck3w5qj1d3" path="res://scripts/scenes/game.gd" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://bid2rj5nw7s5n" path="res://prefabs/minion_spawn_indicator.tscn" id="2_iywne"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://h1ufp1ln44gf" path="res://scripts/behaviours/mouse_click_indicator.gd" id="5_p57ef"]
 [ext_resource type="Script" uid="uid://clin1itgg8eht" path="res://scripts/managers/vfx_manager.gd" id="6_0tnpc"]
 [ext_resource type="Script" uid="uid://bvrgg5lfejikw" path="res://scripts/managers/timer_manager.gd" id="7_0tnpc"]
+[ext_resource type="Script" uid="uid://bykwdvslg7uy2" path="res://scripts/behaviours/enemy_health_bar.gd" id="7_ssvqc"]
 [ext_resource type="Script" uid="uid://rg8wtenp6jxd" path="res://scripts/behaviours/ui/mana.gd" id="7_u5sy4"]
 [ext_resource type="Script" uid="uid://wx7thb3mtcgd" path="res://scripts/managers/ransack_manager.gd" id="8_ir15t"]
 [ext_resource type="Script" uid="uid://mpjvc8sm8t5t" path="res://scripts/managers/level_end_manager.gd" id="9_ca42v"]
@@ -45,6 +46,10 @@ default_color = Color(0.6431373, 0.5529412, 0.7137255, 1)
 
 [node name="VfxManager" type="Node2D" parent="."]
 script = ExtResource("6_0tnpc")
+
+[node name="EnemyHealthBar" type="Polygon2D" parent="."]
+color = Color(0.6509804, 0.39215687, 0.4392157, 1)
+script = ExtResource("7_ssvqc")
 
 [node name="TimerManager" type="Node" parent="."]
 script = ExtResource("7_0tnpc")

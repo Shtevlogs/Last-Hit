@@ -49,6 +49,11 @@ func _spawn_wave(wave: WaveState) -> void:
             location = Vector2i(6 - wave.position.x, wave.position.y)
         minion_at_location = GridHelper.get_minion_or_default(location)
         if minion_at_location != null:
+            # Can't spawn, take damage
+            GameState.current.resource_state.enemy_hits -= 1
+            GameState.current.resource_state.updated.emit()
+            if GameState.current.resource_state.enemy_hits == 0:
+                LevelEndManager.show_end_level()
             return
     var new_minion := MinionHelper.create_minion_from_class(wave.minion_class)
     new_minion.position = location
