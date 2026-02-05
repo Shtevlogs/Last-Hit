@@ -2,14 +2,17 @@ class_name LevelManager
 extends Node
 
 const MINION : PackedScene = preload("uid://bktqfidsx1d8y")
+const ENEMY_MINION_SPAWN_INDICATOR : PackedScene = preload("uid://ck1iwrtnrnpxj")
 
 @onready var level_root: Node2D = $"../LevelRoot"
 
 var state : LevelState
+var time_last_indicated : float
 
 static var _I : LevelManager
 func _ready() -> void:
     state = GameState.current.level_state
+    time_last_indicated = state.level_time
     _I = self
     set_process(false)
 
@@ -20,6 +23,8 @@ func _process(delta : float) -> void:
         _process_opening_gambit()
     elif !state.current_wave_set.remaining_wave_sets.is_empty():
         _process_loop()
+    
+    _update_spawn_indicators()
         
 func _process_opening_gambit() -> void:
     var o := state.current_wave_set.opening_gambit
@@ -38,6 +43,52 @@ func _process_loop() -> void:
         _spawn_wave(wave)
         
         state.loop_idx = (state.loop_idx + 1) % l.size()
+
+func _update_spawn_indicators() -> void:
+    var next_time_indicated := state.level_time + GameConfig.ENEMY_SPAWN_INDICATOR_WARNING
+    
+    var o := state.current_wave_set.opening_gambit
+    var l := state.current_wave_set.remaining_wave_sets
+    
+    if !o.is_empty():
+        var running_time := state.last_time_offset
+        for i : int in o.size():
+            var wave := o[i]
+            var wave_time := running_time + wave.timing_offset
+            if wave_time > time_last_indicated && wave_time <= next_time_indicated:
+                _create_spawn_indicator(wave, wave_time)
+                running_time += wave.timing_offset
+    elif !l.is_empty():
+        var running_time := state.last_time_offset
+        var loop_idx := state.loop_idx
+        while (l[loop_idx].timing_offset + running_time) <= next_time_indicated:
+            var wave := l[loop_idx]
+            if wave.timing_offset + running_time <= time_last_indicated:
+                running_time += wave.timing_offset
+                loop_idx = (loop_idx + 1) % l.size()
+                continue
+            _create_spawn_indicator(wave, wave.timing_offset + running_time)
+            running_time += wave.timing_offset
+            loop_idx = (loop_idx + 1) % l.size()
+    
+    time_last_indicated = next_time_indicated
+
+func _create_spawn_indicator(wave: WaveState, spawn_time: float) -> void:
+    var location := wave.position
+    var minion_at_location := GridHelper.get_minion_or_default(location)
+    if minion_at_location != null: # Do a cheeky little second try
+        if wave.position.x == 3:
+            location = Vector2i(0 if randf() > 0.5 else 6, wave.position.y)
+        else:
+            location = Vector2i(6 - wave.position.x, wave.position.y)
+        minion_at_location = GridHelper.get_minion_or_default(location)
+        if minion_at_location != null:
+            return
+    
+    var indicator := ENEMY_MINION_SPAWN_INDICATOR.instantiate() as EnemyMinionSpawnIndicator
+    indicator.grid_position = location
+    indicator.time = spawn_time - state.level_time
+    level_root.add_child(indicator)
 
 func _spawn_wave(wave: WaveState) -> void:
     var location := wave.position
