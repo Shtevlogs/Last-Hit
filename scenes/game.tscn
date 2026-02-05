@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bkgnymwh1s6iy"]
+[gd_scene load_steps=18 format=3 uid="uid://bkgnymwh1s6iy"]
 
 [ext_resource type="Script" uid="uid://cjnck3w5qj1d3" path="res://scripts/scenes/game.gd" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://bid2rj5nw7s5n" path="res://prefabs/minion_spawn_indicator.tscn" id="2_iywne"]
@@ -8,13 +8,15 @@
 [ext_resource type="Script" uid="uid://h1ufp1ln44gf" path="res://scripts/behaviours/mouse_click_indicator.gd" id="5_p57ef"]
 [ext_resource type="Script" uid="uid://clin1itgg8eht" path="res://scripts/managers/vfx_manager.gd" id="6_0tnpc"]
 [ext_resource type="Script" uid="uid://bvrgg5lfejikw" path="res://scripts/managers/timer_manager.gd" id="7_0tnpc"]
-[ext_resource type="Script" uid="uid://rg8wtenp6jxd" path="res://scripts/behaviours/ui/gold.gd" id="7_u5sy4"]
+[ext_resource type="Script" uid="uid://rg8wtenp6jxd" path="res://scripts/behaviours/ui/mana.gd" id="7_u5sy4"]
 [ext_resource type="Script" uid="uid://wx7thb3mtcgd" path="res://scripts/managers/ransack_manager.gd" id="8_ir15t"]
+[ext_resource type="Script" uid="uid://mpjvc8sm8t5t" path="res://scripts/managers/level_end_manager.gd" id="9_ca42v"]
 [ext_resource type="Script" uid="uid://0jw7xyikcogh" path="res://scripts/behaviours/ui/spawn_button.gd" id="9_vtaks"]
 [ext_resource type="Script" uid="uid://dgplqvgrc0uli" path="res://scripts/behaviours/minion_class/warrior_minion.gd" id="10_kvpfn"]
 [ext_resource type="Script" uid="uid://dvj1hwnolokdj" path="res://scripts/behaviours/minion_class/caster_minion.gd" id="11_dinhu"]
 [ext_resource type="Script" uid="uid://667ff05fjvtm" path="res://scripts/behaviours/minion_class/tank_minion.gd" id="12_kvuet"]
 [ext_resource type="Script" uid="uid://sl2psjwyqsu1" path="res://scripts/behaviours/ui/player_hp.gd" id="14_trtic"]
+[ext_resource type="Script" uid="uid://70txus5lxe8q" path="res://scripts/behaviours/ui/rewards_control.gd" id="17_rysoc"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_yqjtg")
@@ -54,6 +56,12 @@ script = ExtResource("8_ir15t")
 wait_time = 6.0
 autostart = true
 
+[node name="LevelEndManager" type="Node" parent="."]
+script = ExtResource("9_ca42v")
+
+[node name="Timer" type="Timer" parent="LevelEndManager"]
+one_shot = true
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="UI" type="Control" parent="CanvasLayer"]
@@ -81,7 +89,7 @@ alignment = 1
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_colors/font_hover_color = Color(0.78431374, 0.7490196, 0.7490196, 1)
-text = "(Q) Warrior 10g
+text = "(Q) Warrior 30g
 -Ready-"
 flat = true
 script = ExtResource("9_vtaks")
@@ -91,7 +99,7 @@ minion_class = ExtResource("10_kvpfn")
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_colors/font_hover_color = Color(0.78431374, 0.7490196, 0.7490196, 1)
-text = "(W) Caster 10g
+text = "(W) Caster 20g
 -Ready-"
 flat = true
 script = ExtResource("9_vtaks")
@@ -101,7 +109,7 @@ minion_class = ExtResource("11_dinhu")
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_colors/font_hover_color = Color(0.78431374, 0.7490196, 0.7490196, 1)
-text = "(E) Tank 25g
+text = "(E) Tank 75g
 -Ready-"
 flat = true
 script = ExtResource("9_vtaks")
@@ -111,7 +119,7 @@ minion_class = ExtResource("12_kvuet")
 custom_minimum_size = Vector2(20, 100)
 layout_mode = 2
 
-[node name="Gold" type="Label" parent="CanvasLayer/UI/VBoxContainer"]
+[node name="Mana" type="Label" parent="CanvasLayer/UI/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6431373, 0.5529412, 0.7137255, 1)
 text = "0g"
@@ -159,4 +167,39 @@ position = Vector2(10, 7)
 color = Color(0.6509804, 0.39215687, 0.4392157, 1)
 polygon = PackedVector2Array(0, 0, 4, -4, 8, 0, 0, 10, -8, 0, -4, -4)
 
+[node name="RewardsControl" type="Control" parent="CanvasLayer/UI"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("17_rysoc")
+
+[node name="Label" type="Label" parent="CanvasLayer/UI/RewardsControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -4.0
+offset_right = 20.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 16
+text = "+50g"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="timeout" from="RansackManager/Timer" to="RansackManager" method="_on_timer_timeout"]
+[connection signal="timeout" from="LevelEndManager/Timer" to="LevelEndManager" method="_on_timer_timeout"]

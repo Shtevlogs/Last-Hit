@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://dsnhqxkdvfd2g" path="res://scripts/behaviours/upgrade_logic/tank_upgrade.gd" id="6_viwe2"]
 [ext_resource type="Script" uid="uid://ci43q8ta6xh8f" path="res://scripts/behaviours/upgrade_logic/click_damage_upgrade.gd" id="7_viwe2"]
 [ext_resource type="Script" uid="uid://cwwyf6felmysp" path="res://scripts/behaviours/upgrade_logic/click_charge_time_upgrade.gd" id="8_pfdwi"]
-[ext_resource type="Script" uid="uid://rg8wtenp6jxd" path="res://scripts/behaviours/ui/gold.gd" id="9_pfdwi"]
+[ext_resource type="Script" uid="uid://rg8wtenp6jxd" path="res://scripts/behaviours/ui/mana.gd" id="9_pfdwi"]
 
 [node name="UpgradeScreen" type="Control"]
 layout_mode = 3

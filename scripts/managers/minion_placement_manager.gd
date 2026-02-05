@@ -35,8 +35,8 @@ func _create_minion(lane: int) -> void:
     new_minion.position = Vector2i(lane, GameConfig.GRID_HEIGHT - 1)
     LevelManager.spawn_minion(new_minion)
 
-static func _can_spend_gold_and_cooldowns(minion_logic: _MinionClass) -> bool:
-    if GameState.current.resource_state.player_gold < minion_logic.get_spawn_cost():
+static func _can_spend_mana_and_cooldowns(minion_logic: _MinionClass) -> bool:
+    if GameState.current.resource_state.player_mana < minion_logic.get_spawn_cost():
         return false
     if minion_logic.get_cooldown_timer().time < minion_logic.get_spawn_cooldown():
         return false
@@ -46,12 +46,12 @@ static func _spend_gold_and_cooldowns(minion_class: GDScript) -> void:
     var minion_logic := _Strategy.get_strategy_singleton(_MinionClass, minion_class) as _MinionClass
     var cost := minion_logic.get_spawn_cost()
     var cooldown_timer := minion_logic.get_cooldown_timer()
-    GameState.current.resource_state.player_gold -= cost
+    GameState.current.resource_state.player_mana -= cost
     GameState.current.resource_state.updated.emit()
     cooldown_timer.time = 0.0
 
 static func spawn(minion_class: GDScript) -> void:
     var to_spawn := _Strategy.get_strategy_singleton(_MinionClass, minion_class) as _MinionClass
-    if !_can_spend_gold_and_cooldowns(to_spawn): return
+    if !_can_spend_mana_and_cooldowns(to_spawn): return
     _I.set_process(true)
     _I.minion_class_to_spawn = minion_class

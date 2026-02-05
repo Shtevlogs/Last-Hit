@@ -17,7 +17,6 @@ func _ready() -> void:
 func _on_button_pressed() -> void:
     if !logic.can_upgrade(): return
     var cost := logic.get_upgrade_cost()
-    #TODO: change player gold into 'mana', give some 'gold' after a level finishes
     if GameState.current.resource_state.player_gold < cost:
         return
     GameState.current.resource_state.player_gold -= cost

@@ -1,4 +1,4 @@
-class_name Gold
+class_name Mana
 extends Label
 
 var state : ResourceState
@@ -9,4 +9,4 @@ func _ready() -> void:
     _on_resource_updated()
 
 func _on_resource_updated() -> void:
-    text = "%sg" % state.player_gold
+    text = "%smp" % state.player_mana

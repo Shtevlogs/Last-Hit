@@ -77,8 +77,6 @@ static var DATA : Array[WaveSetConfig] = [
                 .after(0.5)
                 .on(4),
             WaveConfig.new(CasterMinion)
-                .on(3),
-            WaveConfig.new(CasterMinion)
                 .on(2),
         ]),
     WaveSetConfig.new()

@@ -25,4 +25,4 @@ func _ready() -> void:
     .finished.connect(func(): queue_free(), CONNECT_ONE_SHOT)
 
 func initialize(param: Variant) -> void:
-    label.text = "%s%sg" % ["+" if param > 0 else "", param]
+    label.text = "%s%smp" % ["+" if param > 0 else "", param]
