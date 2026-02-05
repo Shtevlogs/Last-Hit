@@ -3,6 +3,7 @@ extends Control
 
 @onready var polygon: Polygon2D = $Polygon2D
 @onready var button: Button = $Button
+@onready var label: Label = $Label
 
 @export var upgrade_script: GDScript 
 
@@ -31,4 +32,5 @@ func _refresh_ui() -> void:
         button.disabled = true
         polygon.color = ColorConfig.ENEMY
     button.text = logic.get_upgrade_button_text()
+    label.text = "%sg" % logic.get_upgrade_cost()
     

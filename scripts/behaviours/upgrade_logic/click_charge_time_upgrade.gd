@@ -23,4 +23,22 @@ func get_upgrade_button_text() -> String:
         return "Ch %0.1f-%0.1f" % [current_time, new_time]
 
 func get_upgrade_polygon_data() -> PackedVector2Array:
-    return PackedVector2Array()
+    return PackedVector2Array([
+        Vector2(-1, -6),
+        Vector2(-1, -8),
+        Vector2(1, -8),
+        Vector2(5, -6),
+        Vector2(6, -1),
+        Vector2(6, 1),
+        Vector2(1, 5),
+        Vector2(-1, 5),
+        Vector2(-4, 3),
+        Vector2(-5, 2),
+        Vector2(-3, 2),
+        Vector2(-1, 3),
+        Vector2(1, 3),
+        Vector2(4, 1),
+        Vector2(4, -1),
+        Vector2(3, -4),
+        Vector2(1, -6),
+    ])

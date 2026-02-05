@@ -23,4 +23,12 @@ func get_upgrade_button_text() -> String:
         return "DMG %d-%d" % [roundi(current_damage), roundi(new_damage)]
 
 func get_upgrade_polygon_data() -> PackedVector2Array:
-    return PackedVector2Array()
+    return PackedVector2Array([
+        Vector2(-8, -8),
+        Vector2(4, -4),
+        Vector2(2, -1),
+        Vector2(5, 3),
+        Vector2(3, 5),
+        Vector2(-1, 2),
+        Vector2(-4, 5),
+    ])
