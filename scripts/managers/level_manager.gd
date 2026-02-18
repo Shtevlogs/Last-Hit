@@ -131,7 +131,7 @@ static func start_level(num: int) -> void:
     _I.state.initialized = true
 
 static func clear_level() -> void:
-    #TODO: change this to mana and do rewards separately
+    GameState.current.resource_state.enemy_hits = GameConfig.STARTING_ENEMY_HITS
     GameState.current.resource_state.player_mana = GameConfig.STARTING_MANA
     GameState.current.resource_state.updated.emit()
     var minions := GameState.current.minions.duplicate()

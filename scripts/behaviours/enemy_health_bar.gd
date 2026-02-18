@@ -8,9 +8,10 @@ const MIN_X := -180.0
 
 func _ready() -> void:
     GameState.current.resource_state.updated.connect(_on_updated)
+    _on_updated()
     
 func _on_updated() -> void:
-    var percent := float(GameState.current.resource_state.enemy_hits) / 3.0
+    var percent := float(GameState.current.resource_state.enemy_hits) / float(GameConfig.STARTING_ENEMY_HITS)
     var top_y := MIN_Y + (MAX_Y - MIN_Y) * percent
     
     polygon = PackedVector2Array([
