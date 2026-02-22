@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bswhq3rhdgrrn"]
+[gd_scene load_steps=5 format=3 uid="uid://bswhq3rhdgrrn"]
 
 [ext_resource type="Script" uid="uid://biff84fgbauv2" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://c4yjeh0i400pn" path="res://scripts/scene_manager.gd" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://8wjmpbmpyt8r" path="res://scripts/managers/sfx_manager.gd" id="3_h2yge"]
+[ext_resource type="AudioStream" uid="uid://cv3w587vorpa1" path="res://assets/processed_audio/LastHit.wav" id="4_1bvp3"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_0xm2m")
@@ -17,6 +18,13 @@ script = ExtResource("3_h2yge")
 
 [node name="SFXPlayer" type="AudioStreamPlayer" parent="SfxManager"]
 process_mode = 3
+bus = &"SFX"
 
 [node name="SFXPlayer2" type="AudioStreamPlayer" parent="SfxManager"]
 process_mode = 3
+bus = &"SFX"
+
+[node name="BGMPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_1bvp3")
+autoplay = true
+bus = &"BGM"
