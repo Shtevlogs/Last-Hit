@@ -17,7 +17,8 @@ func _ready() -> void:
     set_process(false)
 
 func _process(delta : float) -> void:
-    state.level_time += delta * (1.0 + float(RansackManager.ransacking_count) * 0.3)
+    var current_level_spawn_modifier := 1.0 + GameConfig.LEVEL_SPAWN_MODIFIER * float(GameState.current.level_number)
+    state.level_time += delta * (1.0 + float(RansackManager.ransacking_count) * 0.3) * current_level_spawn_modifier
     
     if !state.current_wave_set.opening_gambit.is_empty():
         _process_opening_gambit()
@@ -131,7 +132,6 @@ static func start_level(num: int) -> void:
     _I.state.initialized = true
 
 static func clear_level() -> void:
-    GameState.current.player_lost = false
     GameState.current.resource_state.player_hits = GameConfig.STARTING_PLAYER_HITS
     GameState.current.resource_state.enemy_hits = GameConfig.STARTING_ENEMY_HITS
     GameState.current.resource_state.player_mana = GameConfig.STARTING_MANA
@@ -147,7 +147,7 @@ static func go_to_new_level() -> void:
     _I.set_process(true)
 
 static func initialize_level() -> void:
-    if !GameState.current.player_lost && GameState.current.level_state.initialized:
+    if GameState.current.level_state.initialized:
         for minion: MinionState in GameState.current.minions:
             spawn_minion(minion, false)
     else:

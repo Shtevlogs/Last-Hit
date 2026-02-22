@@ -9,9 +9,11 @@ func _ready() -> void:
     
 func _on_update() -> void:
     if state.player_hits == 0:
-        GameState.current.player_lost = true
         SFXManager.play(SFXManager.LOSE)
         get_tree().paused = true
         await get_tree().create_timer(GameConfig.LEVEL_TIMEOUT).timeout
         get_tree().paused = false
+        
+        GameState.current = GameState.new()
+        
         SceneManager.load_scene(SceneManager.SceneId.MAIN_MENU)
