@@ -2,6 +2,7 @@ class_name GameState
 extends _State
 static var current : GameState
 
+var player_lost := false
 var level_number := 0
 var resource_state : ResourceState = ResourceState.new()
 var minions : Array[MinionState] = []

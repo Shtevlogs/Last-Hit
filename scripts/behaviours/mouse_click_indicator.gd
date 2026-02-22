@@ -24,7 +24,9 @@ func _process(delta: float) -> void:
     
     # On release: fire if fully charged, then reset
     if Input.is_action_just_released("click"):
+        SFXManager.stop()
         if is_fully_charged:
+            SFXManager.play_2(SFXManager.HIT)
             var space_state = get_world_2d().direct_space_state
             point_cast.position = global_position
             var result = space_state.intersect_point(point_cast, 1)
@@ -41,12 +43,15 @@ func _process(delta: float) -> void:
         visible = false
         return
         
-    visible = true
-    click_time += delta
-    
     var actual_click_time := GameConfig.PLAYER_FULL_CLICK_TIME - \
         (GameState.current.upgrade_state.click_hold_time_upgrade_level - 1) * \
         GameConfig.PLAYER_FULL_CLICK_TIME_REDUCTION_PER_UPGRADE
+        
+    if visible == false: #hacky 'just pressed' check
+        SFXManager.play(SFXManager.ATTACK, actual_click_time)
+        
+    visible = true
+    click_time += delta
     
     var actual_click_percent := click_time / actual_click_time
     if actual_click_percent >= 1.0:

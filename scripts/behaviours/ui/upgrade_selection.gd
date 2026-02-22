@@ -17,6 +17,7 @@ func _ready() -> void:
 
 func _on_button_pressed() -> void:
     if !logic.can_upgrade(): return
+    SFXManager.play_2(SFXManager.CLICK)
     var cost := logic.get_upgrade_cost()
     if GameState.current.resource_state.player_gold < cost:
         return

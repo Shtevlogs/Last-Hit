@@ -131,13 +131,14 @@ static func start_level(num: int) -> void:
     _I.state.initialized = true
 
 static func clear_level() -> void:
+    GameState.current.player_lost = false
+    GameState.current.resource_state.player_hits = GameConfig.STARTING_PLAYER_HITS
     GameState.current.resource_state.enemy_hits = GameConfig.STARTING_ENEMY_HITS
     GameState.current.resource_state.player_mana = GameConfig.STARTING_MANA
     GameState.current.resource_state.updated.emit()
     var minions := GameState.current.minions.duplicate()
     for minion: MinionState in minions:
         minion.destroyed.emit()
-    #GameState.current.minions = []
 
 static func go_to_new_level() -> void:
     clear_level()
@@ -146,7 +147,7 @@ static func go_to_new_level() -> void:
     _I.set_process(true)
 
 static func initialize_level() -> void:
-    if GameState.current.level_state.initialized:
+    if !GameState.current.player_lost && GameState.current.level_state.initialized:
         for minion: MinionState in GameState.current.minions:
             spawn_minion(minion, false)
     else:

@@ -7,7 +7,8 @@ func _ready() -> void:
     _update_start_button_text()
     
 func _update_start_button_text() -> void:
-    if GameState.current.level_number == 0 && !GameState.current.level_state.initialized:
+    if GameState.current.player_lost || \
+    (GameState.current.level_number == 0 && !GameState.current.level_state.initialized):
         start_button.text = "Start"
     else:
         start_button.text = "Continue"

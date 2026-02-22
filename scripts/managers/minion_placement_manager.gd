@@ -30,6 +30,7 @@ func _process(_delta: float) -> void:
         Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 
 func _create_minion(lane: int) -> void:
+    SFXManager.play_2(SFXManager.SPAWN)
     var new_minion := MinionHelper.create_minion_from_class(minion_class_to_spawn)
     new_minion.enemy = false
     new_minion.position = Vector2i(lane, GameConfig.GRID_HEIGHT - 1)
@@ -53,5 +54,6 @@ static func _spend_gold_and_cooldowns(minion_class: GDScript) -> void:
 static func spawn(minion_class: GDScript) -> void:
     var to_spawn := _Strategy.get_strategy_singleton(_MinionClass, minion_class) as _MinionClass
     if !_can_spend_mana_and_cooldowns(to_spawn): return
+    SFXManager.play_2(SFXManager.CLICK)
     _I.set_process(true)
     _I.minion_class_to_spawn = minion_class

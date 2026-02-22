@@ -26,3 +26,5 @@ static func on_player_damaged() -> void:
     var resource_state := GameState.current.resource_state
     resource_state.player_hits = maxi(0, resource_state.player_hits - 1)
     resource_state.updated.emit()
+    if resource_state.player_hits > 0:
+        SFXManager.play_2(SFXManager.GET_HIT)

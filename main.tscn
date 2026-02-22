@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bswhq3rhdgrrn"]
+[gd_scene load_steps=4 format=3 uid="uid://bswhq3rhdgrrn"]
 
 [ext_resource type="Script" uid="uid://biff84fgbauv2" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://c4yjeh0i400pn" path="res://scripts/scene_manager.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://8wjmpbmpyt8r" path="res://scripts/managers/sfx_manager.gd" id="3_h2yge"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_0xm2m")
@@ -10,3 +11,12 @@ script = ExtResource("1_0xm2m")
 
 [node name="SceneManager" type="Node" parent="."]
 script = ExtResource("1_ig7tw")
+
+[node name="SfxManager" type="Node" parent="."]
+script = ExtResource("3_h2yge")
+
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="SfxManager"]
+process_mode = 3
+
+[node name="SFXPlayer2" type="AudioStreamPlayer" parent="SfxManager"]
+process_mode = 3

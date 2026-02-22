@@ -17,6 +17,7 @@ func _on_timer_timeout() -> void:
 
 #This probably will have a bug when pressing esc, but f it it's the prototype
 static func show_end_level() -> void:
+    SFXManager.play(SFXManager.WIN)
     _I.timer.start(GameConfig.LEVEL_TIMEOUT)
     _I.reward_gold = 50 + GameState.current.level_number * GameState.current.level_number
     _I.rewards_control.open_with(_I.reward_gold)

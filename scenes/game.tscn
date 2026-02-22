@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bkgnymwh1s6iy"]
+[gd_scene load_steps=20 format=3 uid="uid://bkgnymwh1s6iy"]
 
 [ext_resource type="Script" uid="uid://cjnck3w5qj1d3" path="res://scripts/scenes/game.gd" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://bid2rj5nw7s5n" path="res://prefabs/minion_spawn_indicator.tscn" id="2_iywne"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://mpjvc8sm8t5t" path="res://scripts/managers/level_end_manager.gd" id="9_ca42v"]
 [ext_resource type="Script" uid="uid://0jw7xyikcogh" path="res://scripts/behaviours/ui/spawn_button.gd" id="9_vtaks"]
 [ext_resource type="Script" uid="uid://dgplqvgrc0uli" path="res://scripts/behaviours/minion_class/warrior_minion.gd" id="10_kvpfn"]
+[ext_resource type="Script" uid="uid://b857kiq56vjwf" path="res://scripts/managers/player_death_manager.gd" id="11_264po"]
 [ext_resource type="Script" uid="uid://dvj1hwnolokdj" path="res://scripts/behaviours/minion_class/caster_minion.gd" id="11_dinhu"]
 [ext_resource type="Script" uid="uid://667ff05fjvtm" path="res://scripts/behaviours/minion_class/tank_minion.gd" id="12_kvuet"]
 [ext_resource type="Script" uid="uid://sl2psjwyqsu1" path="res://scripts/behaviours/ui/player_hp.gd" id="14_trtic"]
@@ -66,6 +67,9 @@ script = ExtResource("9_ca42v")
 
 [node name="Timer" type="Timer" parent="LevelEndManager"]
 one_shot = true
+
+[node name="PlayerDeathManager" type="Node" parent="."]
+script = ExtResource("11_264po")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
