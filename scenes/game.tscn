@@ -98,7 +98,7 @@ alignment = 1
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_colors/font_hover_color = Color(0.78431374, 0.7490196, 0.7490196, 1)
-text = "(Q) Warrior 30g
+text = "(Q) Warrior 30mp
 -Ready-"
 flat = true
 script = ExtResource("9_vtaks")
@@ -108,7 +108,7 @@ minion_class = ExtResource("10_kvpfn")
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_colors/font_hover_color = Color(0.78431374, 0.7490196, 0.7490196, 1)
-text = "(W) Caster 20g
+text = "(W) Caster 20mp
 -Ready-"
 flat = true
 script = ExtResource("9_vtaks")
@@ -118,7 +118,7 @@ minion_class = ExtResource("11_dinhu")
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_colors/font_hover_color = Color(0.78431374, 0.7490196, 0.7490196, 1)
-text = "(E) Tank 75g
+text = "(E) Tank 75mp
 -Ready-"
 flat = true
 script = ExtResource("9_vtaks")

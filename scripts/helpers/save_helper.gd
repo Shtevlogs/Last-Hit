@@ -1,6 +1,6 @@
 class_name SaveHelper
 
-const FORCE_NEW_SAVE := true
+const FORCE_NEW_SAVE := false
 const SAVE_PATH := "user://save.json"
 
 static func _static_init() -> void:
